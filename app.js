@@ -13,7 +13,7 @@ const render = require("./lib/htmlRenderer");
 let crawleyTeam = [];
 
 // Asking user what kind of employee they are
-function createTeam() {
+function createCrawleyTeam() {
     inquirer.prompt([
         {
             type: "list",
