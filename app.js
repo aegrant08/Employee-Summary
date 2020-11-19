@@ -10,9 +10,9 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-let teamMates = [];
+let crawleyTeam = [];
 
-// Using inquirer to gather information about the team
+// Asking user what kind of employee they are
 function createTeam() {
     inquirer.prompt([
         {
@@ -26,6 +26,7 @@ function createTeam() {
                 "No more employees",
             ]
         }
+        // determining which set of prompts to provide user
     ]).then(userSelection => {
         switch (userSelection.memberSelection) {
             case "Manager":
@@ -38,7 +39,7 @@ function createTeam() {
                 createIntern();
                 break;
             case "No more employees":
-                render(teamMates);
+                render(crawleyTeam);
                 break
         }
     })
@@ -68,11 +69,16 @@ function createTeam() {
                 message: "Please enter your office number.",
                 name: "managerOfficeNumber",
             },
+            {
+                type: "input",
+                message: "Please enter the number of years you have worked at Crawley & Co.",
+                name: "managerYears",
+            },
         ]).then(userSelection => {
             console.log(userSelection);
 
-            const manager = new Manager(userSelection.managerName, userSelection.managerID, userSelection.managerEmail, userSelection.managerOfficeNumber)
-            teamMates.push(manager)
+            const manager = new Manager(userSelection.managerName, userSelection.managerID, userSelection.managerEmail, userSelection.managerOfficeNumber, userSelection.managerYears)
+            crawleyTeam.push(manager)
             createTeam();
         })
     }
@@ -101,11 +107,16 @@ function createTeam() {
                 message: "Please enter your GitHub user name.",
                 name: "engineerGitHub",
             },
+            {
+                type: "input",
+                message: "Please enter the number of years you have worked at Crawley & Co.",
+                name: "engineerYears",
+            },
         ]).then(userSelection => {
             console.log(userSelection);
 
-            const engineer = new Engineer(userSelection.engineerName, userSelection.engineerID, userSelection.engineerEmail, userSelection.engineerGitHub)
-            teamMates.push(engineer)
+            const engineer = new Engineer(userSelection.engineerName, userSelection.engineerID, userSelection.engineerEmail, userSelection.engineerGitHub, userSelection.engineerYears)
+            crawleyTeam.push(engineer)
             createTeam();
         })
 
@@ -145,7 +156,7 @@ function createTeam() {
             console.log(userSelection);
 
             const engineer = new Intern(userSelection.internName, userSelection.internID, userSelection.internEmail, userSelection.internSchool, userSelection.internDegree)
-            teamMates.push(intern)
+            crawleyTeam.push(intern)
             createTeam();
         })
     }
