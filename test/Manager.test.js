@@ -8,14 +8,14 @@ test("Can set office number via constructor argument", () => {
 });
 
 test("Can set years at company via constructor argument", () => {
-  const testValue = "years";
+  const testValue = "yearsAtCompany";
   const e = new Manager("Foo", 1, "test@test.com", 100, testValue);
   expect(e.years).toBe(testValue);
 });
 
 test('getRole() should return "Manager"', () => {
   const testValue = "Manager";
-  const e = new Manager("Foo", 1, "test@test.com", 100, "years");
+  const e = new Manager("Foo", 1, "test@test.com", 100, "yearsAtCompany");
   expect(e.getRole()).toBe(testValue);
 });
 
@@ -26,7 +26,7 @@ test("Can get office number via getOffice()", () => {
 });
 
 test("Can get years at company via getYears()", () => {
-  const testValue = "years";
+  const testValue = "yearsAtCompany";
   const e = new Manager("Foo", 1, "test@test.com", 100, testValue);
   expect(e.getYears()).toBe(testValue);
 });
