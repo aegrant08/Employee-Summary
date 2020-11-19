@@ -79,7 +79,7 @@ function createCrawleyTeam() {
 
             const manager = new Manager(userSelection.managerName, userSelection.managerID, userSelection.managerEmail, userSelection.managerOfficeNumber, userSelection.managerYears)
             crawleyTeam.push(manager)
-            createTeam();
+            createCrawleyTeam();
         })
     }
     // function to add engineer to team
@@ -117,7 +117,7 @@ function createCrawleyTeam() {
 
             const engineer = new Engineer(userSelection.engineerName, userSelection.engineerID, userSelection.engineerEmail, userSelection.engineerGitHub, userSelection.engineerYears)
             crawleyTeam.push(engineer)
-            createTeam();
+            createCrawleyTeam();
         })
 
     }
@@ -157,7 +157,7 @@ function createCrawleyTeam() {
 
             const engineer = new Intern(userSelection.internName, userSelection.internID, userSelection.internEmail, userSelection.internSchool, userSelection.internDegree)
             crawleyTeam.push(intern)
-            createTeam();
+            createCrawleyTeam();
         })
     }
 }
