@@ -10,9 +10,146 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+let teamMates = [];
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+// Using inquirer to gather information about the team
+function createTeam() {
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "memberSelection",
+            message: "Select team member category.",
+            choices: [
+                "Manager",
+                "Engineer",
+                "Intern",
+                "No more employees",
+            ]
+        }
+    ]).then(userSelection => {
+        switch (userSelection.memberSelection) {
+            case "Manager":
+                createManager();
+                break;
+            case "Engineer":
+                createEngineer();
+                break;
+            case "Intern":
+                createIntern();
+                break;
+            case "No more employees":
+                render(teamMates);
+                break
+        }
+    })
+
+    // function to add manager to team
+    function createManager() {
+        // required manager responses
+        inquirer.prompt([
+            {
+                type: "input",
+                message: "Please enter your full name.",
+                name: "managerName",
+
+            },
+            {
+                type: "input",
+                message: "Please enter your employee ID.",
+                name: "managerID",
+            },
+            {
+                type: "input",
+                message: "Please enter your employee ID number.",
+                name: "managerEmail",
+            },
+            {
+                type: "input",
+                message: "Please enter your office number.",
+                name: "managerOfficeNumber",
+            },
+        ]).then(userSelection => {
+            console.log(userSelection);
+
+            const manager = new Manager(userSelection.managerName, userSelection.managerID, userSelection.managerEmail, userSelection.managerOfficeNumber)
+            teamMates.push(manager)
+            createTeam();
+        })
+    }
+    // function to add engineer to team
+    function createEngineer() {
+        // required engineer responses
+        inquirer.prompt([
+            {
+                type: "input",
+                message: "Please enter your full name.",
+                name: "engineerName",
+
+            },
+            {
+                type: "input",
+                message: "Please enter your employee ID number.",
+                name: "engineerID",
+            },
+            {
+                type: "input",
+                message: "Please enter your company email.",
+                name: "engineerEmail",
+            },
+            {
+                type: "input",
+                message: "Please enter your GitHub user name.",
+                name: "engineerGitHub",
+            },
+        ]).then(userSelection => {
+            console.log(userSelection);
+
+            const engineer = new Engineer(userSelection.engineerName, userSelection.engineerID, userSelection.engineerEmail, userSelection.engineerGitHub)
+            teamMates.push(engineer)
+            createTeam();
+        })
+
+    }
+
+    // function to add intern to team
+    function createIntern() {
+        // required intern responses
+        inquirer.prompt([
+            {
+                type: "input",
+                message: "Please enter your full name.",
+                name: "internName",
+
+            },
+            {
+                type: "input",
+                message: "Please enter your employee ID number.",
+                name: "internID",
+            },
+            {
+                type: "input",
+                message: "Please enter your company email.",
+                name: "internEmail",
+            },
+            {
+                type: "input",
+                message: "Please enter your school's name.",
+                name: "internSchool",
+            },
+            {
+                type: "input",
+                message: "Please enter your degree.",
+                name: "internDegree",
+            },
+        ]).then(userSelection => {
+            console.log(userSelection);
+
+            const engineer = new Intern(userSelection.internName, userSelection.internID, userSelection.internEmail, userSelection.internSchool, userSelection.internDegree)
+            teamMates.push(intern)
+            createTeam();
+        })
+    }
+}
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
