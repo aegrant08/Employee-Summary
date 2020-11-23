@@ -20,6 +20,12 @@ The user must input the information for each member of their team. Once they are
 
 
 
+The generated HTML file should look like this:
+
+
+
+
+
 # Tests
 
 Using the jest dependency, tests were run to ensure the code would produce the desired result.
