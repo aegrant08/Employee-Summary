@@ -18,7 +18,7 @@ The user must run `npm install` to install inquirer and jest dependencies.
 
 The user must input the information for each member of their team. Once they are done inputting the data for their team, the user must select `No more employees`. The message `The file was saved!` will let the user know the were successful.
 
-
+![Example](assets/example.gif?raw=true)
 
 The generated HTML file should look like this:
 
