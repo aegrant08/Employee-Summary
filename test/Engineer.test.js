@@ -15,7 +15,7 @@ test("Can set years at company via constructor", () => {
 test("getRole() should return \"Engineer\"", () => {
   const testValue = "Engineer";
   const e = new Engineer("Foo", 1, "test@test.com", "GitHubUser", "yearsAtCompany");
-  expect(e.getPosition()).toBe(testValue);
+  expect(e.getRole()).toBe(testValue);
 });
 
 test("Can get GitHub username via getGithub()", () => {

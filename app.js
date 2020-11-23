@@ -5,19 +5,21 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
 let crawleyTeam = [];
+createCrawleyTeam()
 
 // Asking user what kind of employee they are
 function createCrawleyTeam() {
     inquirer.prompt([
         {
             type: "list",
-            name: "memberSelection",
+            name: "memberChoice",
             message: "Select team member category.",
             choices: [
                 "Manager",
@@ -27,8 +29,8 @@ function createCrawleyTeam() {
             ]
         }
         // determining which set of prompts to provide user
-    ]).then(userSelection => {
-        switch (userSelection.memberSelection) {
+    ]).then(userChoice => {
+        switch (userChoice.memberChoice) {
             case "Manager":
                 createManager();
                 break;
@@ -39,7 +41,13 @@ function createCrawleyTeam() {
                 createIntern();
                 break;
             case "No more employees":
-                render(crawleyTeam);
+                const html = render(crawleyTeam);
+                fs.writeFile(outputPath, html, function (err) {
+                    if (err) {
+                        return console.log(err);
+                    }
+                    console.log("The file was saved!");
+                });
                 break
         }
     })
@@ -61,7 +69,7 @@ function createCrawleyTeam() {
             },
             {
                 type: "input",
-                message: "Please enter your employee ID number.",
+                message: "Please enter your company email.",
                 name: "managerEmail",
             },
             {
@@ -74,10 +82,10 @@ function createCrawleyTeam() {
                 message: "Please enter the number of years you have worked at Crawley & Co.",
                 name: "managerYears",
             },
-        ]).then(userSelection => {
-            console.log(userSelection);
+        ]).then(userChoice => {
+            console.log(userChoice);
 
-            const manager = new Manager(userSelection.managerName, userSelection.managerID, userSelection.managerEmail, userSelection.managerOfficeNumber, userSelection.managerYears)
+            const manager = new Manager(userChoice.managerName, userChoice.managerID, userChoice.managerEmail, userChoice.managerOfficeNumber, userChoice.managerYears)
             crawleyTeam.push(manager)
             createCrawleyTeam();
         })
@@ -112,10 +120,10 @@ function createCrawleyTeam() {
                 message: "Please enter the number of years you have worked at Crawley & Co.",
                 name: "engineerYears",
             },
-        ]).then(userSelection => {
-            console.log(userSelection);
+        ]).then(userChoice => {
+            console.log(userChoice);
 
-            const engineer = new Engineer(userSelection.engineerName, userSelection.engineerID, userSelection.engineerEmail, userSelection.engineerGitHub, userSelection.engineerYears)
+            const engineer = new Engineer(userChoice.engineerName, userChoice.engineerID, userChoice.engineerEmail, userChoice.engineerGitHub, userChoice.engineerYears)
             crawleyTeam.push(engineer)
             createCrawleyTeam();
         })
@@ -152,16 +160,22 @@ function createCrawleyTeam() {
                 message: "Please enter your degree.",
                 name: "internDegree",
             },
-        ]).then(userSelection => {
-            console.log(userSelection);
+        ]).then(userChoice => {
+            console.log(userChoice);
 
-            const engineer = new Intern(userSelection.internName, userSelection.internID, userSelection.internEmail, userSelection.internSchool, userSelection.internDegree)
+            const intern = new Intern(userChoice.internName, userChoice.internID, userChoice.internEmail, userChoice.internSchool, userChoice.internDegree)
             crawleyTeam.push(intern)
             createCrawleyTeam();
         })
     }
 }
-
+// const html = render(crawleyTeam)
+// fs.writeFile(outputPath, html, function (err) {
+//     if (err) {
+//         return console.log(err);
+//     }
+//     console.log("The file was saved!");
+// });
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
