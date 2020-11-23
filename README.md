@@ -2,13 +2,7 @@
 
 # Description
 
-The application takes the user's input and, through JavaScript and Node.js, generates an HTML template for a team.
-
-# Technologies Used
-
-Node.js
-JavaScript
-HTML
+The application takes the user's input and, through JavaScript and Node.js, generates an HTML template for a company to use to show off their team.
 
 # Installation
 
@@ -18,9 +12,9 @@ The user must run `npm install` to install inquirer and jest dependencies.
 
 The user must input the information for each member of their team. Once they are done inputting the data for their team, the user must select `No more employees`. The message `The file was saved!` will let the user know the were successful.
 
-![Example](assets/example.gif?raw=true)
+![Example](assets/example.png?raw=true)
 
-The generated HTML file should look like this:
+Upon completion, the user should go to the output file and open the team.html file in their browser. The generated HTML file should look like this:
 
 ![Team](assets/screen-shots/2-generated-team.png?raw=true)
 
@@ -30,5 +24,10 @@ Using the jest dependency, tests were run to ensure the code would produce the d
 
 ![Test](assets/screen-shots/1-npm-tests.png?raw=true)
 
+# Technologies Used
+
+Node.js
+JavaScript
+HTML
 
 
