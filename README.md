@@ -22,9 +22,7 @@ The user must input the information for each member of their team. Once they are
 
 The generated HTML file should look like this:
 
-
-
-
+![Team](assets/screen-shots/2-generated-team.png?raw=true)
 
 # Tests
 
